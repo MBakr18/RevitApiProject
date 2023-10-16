@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>Application ParametersSetter</Name>
+    <Assembly>ParametersSetter.dll</Assembly>
+	<FullClassName>ParametersSetter.Application.ExternalApp</FullClassName>
+	<Text>Create Panel-tab-button</Text>
+	<ClientId>c4939734-eb24-46bc-a9d5-af3bdce11636</ClientId>
+    <VendorId>MBakr</VendorId>
+    <VendorDescription>Mohamed Bakr, mbakr2018@gmail.com</VendorDescription>
+  </AddIn>
+</RevitAddIns>

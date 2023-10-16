@@ -1,0 +1,183 @@
+﻿<Window x:Class="ParametersSetter.Views.MainWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ParametersSetter.Views"
+             mc:Ignorable="d" 
+             Title="Parameters Setter" Height="750" Width="350">
+    <Window.Resources>
+        <Style x:Key="MyButtonStyle" TargetType="Button">
+            <!-- Define your button style properties here -->
+            <Setter Property="Background" Value="#495057"/>
+            <Setter Property="Foreground" Value="#F8F9FA"/>
+            <!-- Add other style properties as needed -->
+        </Style>
+    </Window.Resources>
+
+    <Border Padding="10" CornerRadius="5" Background="#e5e5e5">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <!-- UIElements -->
+            <Border Grid.Row="0" BorderBrush="LightGray" BorderThickness="2"
+                    CornerRadius="4" Background="#F8F9FA">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="1.5*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <!-- Categories -->
+                    <Border Grid.Row="0" Margin=".2">
+                        <Expander  Name="categoriesExpander" Header="Categories">
+                            <ListBox Name="categoriesListBox" 
+                                     ItemsSource="{Binding CategoryList}" 
+                                     SelectedItem="{Binding SelectedCategory,
+                                    Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                     SelectionMode="Single">
+
+                                <!-- <ListBox.ItemTemplate> -->
+                                <!--     <DataTemplate> -->
+                                <!--         <CheckBox Content="{Binding CategoryName}"  -->
+                                <!--                   IsChecked="{Binding IsSelectedCategory,  -->
+                                <!--             Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/> -->
+                                <!--     </DataTemplate> -->
+                                <!-- </ListBox.ItemTemplate> -->
+                            </ListBox>
+                        </Expander>
+                    </Border>
+
+                    <!-- Families -->
+                    <Border Grid.Row="1" Margin=".2">
+                        <Expander  Name="familiesExpander" Header="Families">
+                            <ListBox Name="familiesListBox"
+                                     ItemsSource="{Binding FamilyList}"
+                                     SelectedItem="{Binding SelectedFamily,
+                                Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                     SelectionMode="Single">
+                                
+
+                                <!-- <ListBox.ItemTemplate> -->
+                                <!--     <DataTemplate> -->
+                                <!--         <CheckBox Content="{Binding FamilyName}" /> -->
+                                <!--     </DataTemplate> -->
+                                <!-- </ListBox.ItemTemplate> -->
+                            </ListBox>
+                        </Expander>
+                    </Border>
+
+                    <!-- Types -->
+                    <Border Grid.Row="2" Margin=".2">
+                        <Expander  Name="typesExpander" Header="Types">
+                            <ListBox Name="typesListBox"
+                                     ItemsSource="{Binding TypeList}" 
+                                     SelectedItem="{Binding SelectedType,
+                                    Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                     SelectionMode="Single">
+
+
+                                <!-- <ListBox.ItemTemplate> -->
+                                <!--     <DataTemplate> -->
+                                <!--         <CheckBox Content="{Binding TypeName}" /> -->
+                                <!--     </DataTemplate> -->
+                                <!-- </ListBox.ItemTemplate> -->
+                            </ListBox>
+                        </Expander>
+                    </Border>
+
+                    <!-- Parameters -->
+                    <Border Grid.Row="3" Margin=".2">
+                        <Expander Name="parametersExpander" Header="Parameters">
+                            <DataGrid Name="DataGrid" AutoGenerateColumns="False" 
+                                      HorizontalAlignment="Stretch"
+                                      ItemsSource="{Binding ParameterInfoList}"
+                                      SelectedItem="{Binding  SelectedParameter,
+                                    Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Width=".5*" Header="Parameter Name" Binding="{Binding ParameterName}" />
+                                    <DataGridTextColumn Width=".5*" Header="Parameter Value" Binding="{Binding ParameterValue}" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Expander>
+                    </Border>
+
+                </Grid>
+
+            </Border>
+
+            <!-- Modification -->
+            <Border Grid.Row="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height=".75*"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0" VerticalAlignment="Center">
+                                Property Value
+                            </Label>
+
+                            <Border Grid.Column="1">
+                                <TextBox Name="ParamValueTextBox" 
+                                         Text="{Binding EditedParameterValue,
+                                    Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                         VerticalAlignment="Center" Height="30"
+                                         Margin="10" Padding="2"></TextBox>
+                            </Border>
+                        </Grid>
+
+                    </Border>
+
+                    <!-- Buttons -->
+                    <Border Grid.Row="1" Margin="10">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <Button Style="{StaticResource MyButtonStyle}"
+                                    Grid.Row="0" Margin="5"
+                                    Command="{Binding ModifyCommand}">
+                                Modify
+                            </Button>
+
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Button Style="{StaticResource MyButtonStyle}"
+                                    Grid.Column="0" Margin="5" HorizontalAlignment="Stretch"
+                                    Command="{Binding ImportCommand}">
+                                    Import
+                                </Button>
+
+                                <Button Style="{StaticResource MyButtonStyle}"
+                                        Grid.Column="1" Margin="5" HorizontalAlignment="Stretch"
+                                        Command="{Binding ExportCommand}">
+                                    Export
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Border>
+</Window>
